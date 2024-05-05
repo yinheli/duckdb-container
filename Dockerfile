@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -L -o /usr/sbin/mc https://dl.min.io/client/mc/release/linux-amd64/mc && chmod +x /usr/sbin/mc
 RUN \
   curl -L -o duckdb_cli-linux-amd64.zip \
-    https://github.com/duckdb/duckdb/releases/download/v0.10.1/duckdb_cli-linux-amd64.zip && \
+    https://github.com/duckdb/duckdb/releases/download/v0.10.2/duckdb_cli-linux-amd64.zip && \
   unzip duckdb_cli-linux-amd64.zip && \
   mv duckdb /usr/sbin/duckdb && \
   rm duckdb_cli-linux-amd64.zip
