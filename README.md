@@ -18,8 +18,6 @@ spec:
   #   kubernetes.io/hostname: xxx
   containers:
     - name: duckdb
-      # for speed up in China
-      # image: docker.mirrors.sjtug.sjtu.edu.cn/yinheli/duckdb:latest
       image: yinheli/duckdb:latest
       imagePullPolicy: Always
       resources:
