@@ -18,10 +18,10 @@ RUN if [ "$TARGETARCH" = "arm64" ]; then \
 
 RUN if [ "$TARGETARCH" = "arm64" ]; then \
       curl -L -o duckdb_cli-linux-aarch64.zip \
-        https://github.com/duckdb/duckdb/releases/download/v1.2.1/duckdb_cli-linux-aarch64.zip; \
+        https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-aarch64.zip; \
     else \
       curl -L -o duckdb_cli-linux-amd64.zip \
-        https://github.com/duckdb/duckdb/releases/download/v1.2.1/duckdb_cli-linux-amd64.zip; \
+        https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-amd64.zip; \
     fi && \
     unzip duckdb_cli-linux-*.zip && \
     mv duckdb /usr/sbin/duckdb && \
