@@ -9,24 +9,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim wget curl unzip \
     && rm -rf /var/lib/apt/lists/*
 
-RUN if [ "$TARGETARCH" = "arm64" ]; then \
-      curl -L -o /usr/sbin/mc https://dl.min.io/client/mc/release/linux-arm64/mc; \
-    else \
-      curl -L -o /usr/sbin/mc https://dl.min.io/client/mc/release/linux-amd64/mc; \
-    fi && \
-    chmod +x /usr/sbin/mc
+# Copy mc binary from official MinIO mc image
+COPY --from=minio/mc:latest /usr/bin/mc /usr/sbin/mc
 
+# Install DuckDB by downloading binary (no official Docker image available)
 RUN if [ "$TARGETARCH" = "arm64" ]; then \
       curl -L -o duckdb_cli-linux-aarch64.zip \
-        https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-aarch64.zip; \
+        https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-linux-aarch64.zip; \
     else \
       curl -L -o duckdb_cli-linux-amd64.zip \
-        https://github.com/duckdb/duckdb/releases/download/v1.3.0/duckdb_cli-linux-amd64.zip; \
+        https://github.com/duckdb/duckdb/releases/download/v1.3.2/duckdb_cli-linux-amd64.zip; \
     fi && \
     unzip duckdb_cli-linux-*.zip && \
     mv duckdb /usr/sbin/duckdb && \
     rm duckdb_cli-linux-*.zip
 
+# Install DuckDB extensions
 RUN \
   duckdb -c 'install arrow;' && \
   duckdb -c 'install autocomplete;' && \
